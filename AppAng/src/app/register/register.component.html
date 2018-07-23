@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+
+      <div class="card text-center">
+        <div class="card-header">
+          Register
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email </label>
+              <input type="email" class="form-control"  [(ngModel)]="resgisterDataUser.email" 
+              placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="resgisterDataUser.password" 
+               placeholder="Password" name="password">
+            </div>
+       
+            <button type="button" (click)="EnregistrerData()" class="btn btn-primary float-right">Submit</button>
+          </form>
+        </div>
+      
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

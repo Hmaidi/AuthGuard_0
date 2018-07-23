@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/events">Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/eventsSpec"  >Events special</a>
+      </li>
+ 
+    
+    </ul>
+    <ul class="form-inline  navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+            <a class="nav-link"  routerLink="/register" >Register</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link"  routerLink="/login">Login</a>
+            </li>
+          </ul>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
