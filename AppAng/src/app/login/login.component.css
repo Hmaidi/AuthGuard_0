@@ -1,0 +1,8 @@
+
+.form-group {
+    text-align: left !important;
+}
+.form-group label {
+    font-weight: bold;
+    text-align: left;
+}
