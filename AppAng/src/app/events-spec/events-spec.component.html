@@ -1,3 +1,15 @@
-<p>
-  events-spec works!
-</p>
+
+  <div class="row pt-5">
+    <div class="col-md-4  mb-4" *ngFor="let ListEventsSpec of ListEventsSpec let i=index">
+  <div class="card">
+      <div class="card-header bg-transparent"> Event Special  <strong>{{i+1}}</strong> </div>
+
+    <div class="card-body">
+      <h5 class="card-title">{{ListEventsSpec.Name}}</h5>
+      <p class="card-text">{{ListEventsSpec.Description}}</p>
+      <a href="#" class="btn btn-success">View More</a>
+    </div>
+    <div class="card-footer bg-transparent ">{{ListEventsSpec.Date}}</div>
+  </div>
+</div>
+</div>

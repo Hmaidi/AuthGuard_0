@@ -1,5 +1,6 @@
 const express = require('express');
 const Router = express.Router();
+const jwt = require('jsonwebtoken');
 const User = require('../Models/user');
 const mongoose = require("mongoose");
 
@@ -37,7 +38,10 @@ Router.post('/login',(req,res)=>{
             res.status(401).send('Invalid password')
         }
         else{
-            res.status(200).send('Password Correct')
+
+            let payload = {subject: user._id};
+            let token = jwt.sign(payload,'keysec');
+            res.status(200).send({token})
         }
           
     }
@@ -55,7 +59,10 @@ Router.post('/register',(req,res)=>{
            console.log(error);
        }
        else{
-           res.status(200).send(registerData);
+    
+           let payload = {subject: registerData._id};
+           let token = jwt.sign(payload,'keysec');
+           res.status(200).send({token});
        }
    })
 
@@ -94,7 +101,7 @@ Router.get('/events',(req,res)=>{
    res.json(events);
  })
 Router.get('/eventsSpec',(req,res)=>{
-   let events = [
+   let eventsSpec = [
     {
         "_id": "1",
         "Name" :"Events Spec1",
@@ -120,7 +127,7 @@ Router.get('/eventsSpec',(req,res)=>{
         "Date" :"19/07/2018  20:14"
        }
    ]
-   res.json(events);
+   res.json(eventsSpec);
  
  })
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { error } from '../../../node_modules/@angular/compiler/src/util';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import { error } from '../../../node_modules/@angular/compiler/src/util';
 export class RegisterComponent implements OnInit {
 
   resgisterDataUser = { };
-  constructor(private authsevice: AuthService) { }
+  constructor(private authsevice: AuthService, private routerSrvice: Router) { }
 
   ngOnInit() {
   }
@@ -20,8 +20,12 @@ export class RegisterComponent implements OnInit {
     // console.log( this.resgisterDataUser);
     this.authsevice.UserEntregister(this.resgisterDataUser)
     .subscribe(
-      res => console.log(res),
-      err => console.log(error)
+      res => {
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        this.routerSrvice.navigate(['/eventsSpec']);
+      },
+      err => console.log(err)
     ) ;
   }
 

@@ -6,8 +6,7 @@ const express = require('express');
  const app = express();
  const api = require('../server/routers/api')
  app.use(bodyparser.json());
- app.use(cors())
-
+ app.use(cors());
  app.use('/api',api);
  app.get('/', function(req,res){
        res.send("hello the premier test");
