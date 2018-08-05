@@ -1,6 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const Router = express.Router();
 const jwt = require('jsonwebtoken');
+const  expressJwt = require('express-jwt');  
+var app = express()
+app.use(bodyParser.json())
 const User = require('../Models/user');
 const mongoose = require("mongoose");
 
@@ -15,6 +19,39 @@ mongoose.connect(db,{ useNewUrlParser: true },err =>{
     }
 
 })
+
+function verificationToken(req, res, next){
+   
+   if(!req.headers.authorization){ 
+       res.status(401).send('vous étes pas autorsiee')
+   
+   }
+   let token = req.headers.authorization.split(' ')[1]
+   let payload = jwt.verify(token,'secretKey',(err,decoded)=>{
+    if (err) {
+    return res.status(401).send({"message": 'Unauthorized access.' });
+    }
+    req.decoded = decoded;
+    next();
+   });
+   
+   if(token ==='null'){
+       res.status(401).send('vous étes pas autorsiee Token Null')
+       console.log('Token Nul ')
+    }
+
+
+
+   if(!payload)
+   {res.status(401).send('vous étes pas autorsiee token non verifier ')
+   console.log('payload nulll ')
+  }
+   else
+      req.userId = payload.subject;
+      next();
+   return false;
+}
+
 Router.get('/',(req,res)=>{
     res.send(" from api server")
 
@@ -40,7 +77,7 @@ Router.post('/login',(req,res)=>{
         else{
 
             let payload = {subject: user._id};
-            let token = jwt.sign(payload,'keysec');
+            let token = jwt.sign(payload,'secretKey');
             res.status(200).send({token})
         }
           
@@ -61,7 +98,7 @@ Router.post('/register',(req,res)=>{
        else{
     
            let payload = {subject: registerData._id};
-           let token = jwt.sign(payload,'keysec');
+           let token = jwt.sign(payload,'secretKey');
            res.status(200).send({token});
        }
    })
@@ -100,7 +137,7 @@ Router.get('/events',(req,res)=>{
    ]
    res.json(events);
  })
-Router.get('/eventsSpec',(req,res)=>{
+Router.get('/eventsSpec', verificationToken,(req,res)=>{
    let eventsSpec = [
     {
         "_id": "1",

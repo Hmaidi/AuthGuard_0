@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
     this.authsevice.UserEntregister(this.resgisterDataUser)
     .subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         localStorage.setItem('token', res.token);
-        this.routerSrvice.navigate(['/eventsSpec']);
+         this.routerSrvice.navigate(['/events']);
       },
       err => console.log(err)
     ) ;

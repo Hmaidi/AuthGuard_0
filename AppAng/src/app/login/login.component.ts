@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
      this.serviceLogin.UserLogin(this.loginUserData)
      .subscribe(
       res => {
-        console.log(res);
+      //  console.log(res);
         localStorage.setItem('token', res.token);
         this.routerSrvice.navigate(['/eventsSpec']);
       },
-       err => console.error()
+       err => console.log(err)
      );
 
   }

@@ -4,11 +4,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { EventsComponent } from './events/events.component';
 import { EventsSpecComponent } from './events-spec/events-spec.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path : '',
-    redirectTo : '/events',
+    redirectTo : 'events',
     pathMatch: 'full'
   },
   {
@@ -21,7 +22,9 @@ const routes: Routes = [
     path : 'events', component : EventsComponent
   },
   {
-    path : 'eventsSpec', component : EventsSpecComponent
+    path : 'eventsSpec',
+    component : EventsSpecComponent
+    // canActivate: [AuthGuard]
   }
 ];
 
